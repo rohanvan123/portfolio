@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const work = [
+  {
+    title: "Selected Project",
+    description: "A concise case study slot for the strongest project.",
+    meta: "Case study",
+  },
+  {
+    title: "Engineering Notes",
+    description: "Short writing, technical decisions, and process artifacts.",
+    meta: "Writing",
+  },
+  {
+    title: "Current Focus",
+    description: "A lightweight place to show what you are learning or building now.",
+    meta: "Now",
+  },
+];
+---
+
+<BaseLayout
+  title="Rohan V | Personal Website"
+  description="Minimal personal website and portfolio for Rohan V."
+>
+  <main>
+    <section class="hero" aria-labelledby="intro-title">
+      <div>
+        <p class="eyebrow">Personal website</p>
+        <h1 id="intro-title">Minimal, direct, and built to evolve.</h1>
+        <p class="lead">
+          A clean portfolio foundation for projects, writing, and experiments in visual
+          style without carrying unnecessary application weight.
+        </p>
+        <div class="actions">
+          <a class="button" href="#work">View work</a>
+          <a class="button secondary" href="mailto:hello@example.com">Get in touch</a>
+        </div>
+      </div>
+      <aside class="profile-panel" aria-label="Profile summary">
+        <div class="portrait" aria-hidden="true">RV</div>
+        <p>
+          Replace this mark with a portrait, logo, or alternate style treatment as the
+          visual direction sharpens.
+        </p>
+      </aside>
+    </section>
+
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="section-heading">
+        <h2 id="work-title">Work</h2>
+        <p>
+          Start with a few high-signal entries. Each item can later become a dedicated
+          case study page without changing the site architecture.
+        </p>
+      </div>
+      <div class="work-list">
+        {
+          work.map((item) => (
+            <article class="work-item">
+              <div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+              <span>{item.meta}</span>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="section-heading">
+        <h2 id="about-title">About</h2>
+        <p>
+          This section is intentionally spare for now. The next iteration can tune the
+          voice, add resume details, and test visual systems without revisiting setup.
+        </p>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
