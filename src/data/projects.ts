@@ -8,6 +8,14 @@ export interface Project {
 
 const projects: Project[] = [
   {
+    title: "RV Programming Language",
+    description:
+      "C++ interpreter for my very own python-like programming language",
+    tech: ["C++"],
+    imageUrl: "/images/pathfinding-vis.png",
+    link: "https://rohanvanjani.com/pathfinding-visualizer/",
+  },
+  {
     title: "Pathfinding Visualizer",
     description:
       "Web app for visualizing pathfinding algorithms like BFS, Dijkstra's, and A* Search",

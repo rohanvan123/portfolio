@@ -25,18 +25,19 @@ const { title, description } = Astro.props;
       <header class="site-header" aria-label="Site header">
         <a class="brand" href="/" aria-label="Home">
           <span class="brand-mark">RV</span>
-          <span>Rohan V</span>
+          <span>Rohan Vanjani</span>
         </a>
         <nav class="nav" aria-label="Primary navigation">
-          <a href="#work">Work</a>
           <a href="#about">About</a>
-          <a href="mailto:hello@example.com">Contact</a>
+          <a href="#experience">Experience</a>
+          <a href="#projects">Projects</a>
+          <a href="/files/resume.pdf">Resume</a>
         </nav>
       </header>
       <slot />
       <footer class="site-footer">
-        <span>Built with Astro.</span>
-        <span>Deploys from GitHub through Vercel.</span>
+        <span>Rohan Vanjani</span>
+        <a href="/files/resume.pdf">Resume</a>
       </footer>
     </div>
   </body>

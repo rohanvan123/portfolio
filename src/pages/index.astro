@@ -1,83 +1,357 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import experiences from "../data/experiences";
+import projects from "../data/projects";
 
-const work = [
-  {
-    title: "Selected Project",
-    description: "A concise case study slot for the strongest project.",
-    meta: "Case study",
-  },
-  {
-    title: "Engineering Notes",
-    description: "Short writing, technical decisions, and process artifacts.",
-    meta: "Writing",
-  },
-  {
-    title: "Current Focus",
-    description: "A lightweight place to show what you are learning or building now.",
-    meta: "Now",
-  },
-];
+const sortDateValue = (date: string | null) => (date ? Date.parse(`${date}-01`) : Infinity);
+
+const formatDate = (date: string | null) => {
+  if (!date) {
+    return "Present";
+  }
+
+  return new Intl.DateTimeFormat("en", {
+    month: "short",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(new Date(`${date}-01T00:00:00Z`));
+};
+
+const formatDateRange = (startDate: string, endDate: string | null) =>
+  `${formatDate(startDate)} - ${formatDate(endDate)}`;
+
+const visibleExperiences = experiences
+  .filter((experience) => experience.display)
+  .sort((a, b) => {
+    const endDateDifference = sortDateValue(b.endDate) - sortDateValue(a.endDate);
+
+    if (endDateDifference !== 0) {
+      return endDateDifference;
+    }
+
+    return sortDateValue(b.startDate) - sortDateValue(a.startDate);
+  });
+
+const getInitials = (name: string) =>
+  name
+    .split(" ")
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("");
+
+const experiencePageSize = 3;
+const experiencePageCount = Math.ceil(visibleExperiences.length / experiencePageSize);
 ---
 
 <BaseLayout
-  title="Rohan V | Personal Website"
-  description="Minimal personal website and portfolio for Rohan V."
+  title="Rohan Vanjani | Personal Website"
+  description="Minimal personal website and portfolio for Rohan Vanjani."
 >
   <main>
-    <section class="hero" aria-labelledby="intro-title">
-      <div>
-        <p class="eyebrow">Personal website</p>
-        <h1 id="intro-title">Minimal, direct, and built to evolve.</h1>
-        <p class="lead">
-          A clean portfolio foundation for projects, writing, and experiments in visual
-          style without carrying unnecessary application weight.
-        </p>
-        <div class="actions">
-          <a class="button" href="#work">View work</a>
-          <a class="button secondary" href="mailto:hello@example.com">Get in touch</a>
+    <div class="portfolio-stack">
+      <section class="intro-panel" id="about" aria-labelledby="about-title">
+        <div class="identity-section">
+          <img
+            class="profile-photo"
+            src="/images/personal_photo.jpg"
+            alt="Portrait of Rohan Vanjani"
+            width="320"
+            height="320"
+          />
+          <h1 id="intro-title" class="typing-name">
+            <span>Rohan Vanjani</span>
+          </h1>
+          <nav class="profile-links" aria-label="Profile links">
+            <a href="https://github.com/rohanvan123" target="_blank" rel="noreferrer">
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.1-1.3-.4-2.6-1.3-3.5.1-.4.5-1.8-.2-3.5 0 0-1-.3-3.5 1.3a12.3 12.3 0 0 0-6 0C6.5 1.7 5.5 2 5.5 2c-.7 1.7-.3 3.1-.2 3.5A5.1 5.1 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.4.5-.7 1.2-.8 2-1.8.8-3.2.3-4.2-1-.2-.3-.8-1-1.6-1 0 0-1 0-.1.6.6.3 1 1.3 1 1.3.6 1.7 2.8 1.1 4.9.9V22"></path>
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a
+              href="https://www.linkedin.com/in/rohan-vanjani/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                <path d="M2 9h4v12H2z"></path>
+                <circle cx="4" cy="4" r="2"></circle>
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+            <a href="/files/resume.pdf" target="_blank" rel="noreferrer">
+              <svg aria-hidden="true" viewBox="0 0 24 24">
+                <path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"></path>
+                <path d="M14 2v5h5"></path>
+                <path d="M9 15h6"></path>
+                <path d="M9 18h4"></path>
+              </svg>
+              <span>Resume</span>
+            </a>
+          </nav>
         </div>
-      </div>
-      <aside class="profile-panel" aria-label="Profile summary">
-        <div class="portrait" aria-hidden="true">RV</div>
-        <p>
-          Replace this mark with a portrait, logo, or alternate style treatment as the
-          visual direction sharpens.
-        </p>
-      </aside>
-    </section>
 
-    <section class="section" id="work" aria-labelledby="work-title">
-      <div class="section-heading">
-        <h2 id="work-title">Work</h2>
-        <p>
-          Start with a few high-signal entries. Each item can later become a dedicated
-          case study page without changing the site architecture.
-        </p>
-      </div>
-      <div class="work-list">
-        {
-          work.map((item) => (
-            <article class="work-item">
-              <div>
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
-              <span>{item.meta}</span>
-            </article>
-          ))
-        }
-      </div>
-    </section>
+        <div class="about-panel">
+          <h2 id="about-title">Hello, I’m Rohan Vanjani.</h2>
+          <p class="lead">
+            I’m a <strong>Software Engineer at <a
+              href="https://www.blueorigin.com/"
+              target="_blank"
+              rel="noreferrer"
+              >Blue Origin</a
+            ></strong> and an <strong>MCS student</strong> at the <a
+              href="https://illinois.edu/"
+              target="_blank"
+              rel="noreferrer">University of Illinois Urbana-Champaign</a
+            >.
+          </p>
+          <p>
+            I earned my <strong>B.S. in Computer Science & Mathematics</strong> from UIUC
+            and am currently pursuing my MCS degree while working full-time.
+          </p>
+          <p>
+            I’m passionate about <strong>backend engineering</strong>, <strong
+              >systems programming</strong
+            >, and <strong>AI tooling</strong>, with a particular interest in the
+            intersection of <strong>software and aerospace technology</strong>.
+          </p>
+          <p>
+            Outside of engineering, I enjoy weightlifting, running, and playing the
+            guitar. I’m also a former <a
+              href="https://en.wikipedia.org/wiki/Bhangra_(dance)"
+              target="_blank"
+              rel="noreferrer">Bhangra</a
+            > dancer and love learning new styles of dance.
+          </p>
+          <p>
+            Feel free to contact me for opportunities at <a
+              href="mailto:rohanvanj21@gmail.com" target="_blank" rel="noreferrer"
+              >rohanvanj21@gmail.com</a
+            >.
+          </p>
+        </div>
+      </section>
 
-    <section class="section" id="about" aria-labelledby="about-title">
-      <div class="section-heading">
-        <h2 id="about-title">About</h2>
-        <p>
-          This section is intentionally spare for now. The next iteration can tune the
-          voice, add resume details, and test visual systems without revisiting setup.
-        </p>
-      </div>
-    </section>
+      <a class="section-jump" href="#experience" aria-label="Jump to Experience">
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M12 5v14"></path>
+          <path d="m19 12-7 7-7-7"></path>
+        </svg>
+      </a>
+
+      <section class="experience-panel" id="experience" aria-labelledby="experience-title">
+        <div class="experience-header">
+          <div class="section-heading">
+            <h2 id="experience-title">Experience</h2>
+          </div>
+        </div>
+        <div class="experience-carousel-shell">
+          <button
+            class="carousel-arrow carousel-arrow-left"
+            type="button"
+            data-experience-prev
+            aria-label="Previous experiences"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="m15 18-6-6 6-6"></path>
+            </svg>
+          </button>
+          <div
+            class="timeline"
+            data-experience-carousel
+            data-page-size={experiencePageSize}
+            data-page-count={experiencePageCount}
+          >
+            {
+              visibleExperiences.map((experience, index) => (
+                <article class="timeline-item" data-experience-item data-index={index}>
+                  <a
+                    class="logo-frame"
+                    href={experience.url}
+                    aria-label={experience.company}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {experience.img ? (
+                      <img src={experience.img} alt="" loading="lazy" />
+                    ) : (
+                      <span>{getInitials(experience.company)}</span>
+                    )}
+                  </a>
+                  <div class="timeline-content">
+                    <div class="timeline-meta">
+                      <a href={experience.url} target="_blank" rel="noreferrer">
+                        <h3>{experience.company}</h3>
+                      </a>
+                      <span>{formatDateRange(experience.startDate, experience.endDate)}</span>
+                    </div>
+                    <p class="role">{experience.position}</p>
+                    <p>{experience.description}</p>
+                  </div>
+                </article>
+              ))
+            }
+          </div>
+          <button
+            class="carousel-arrow carousel-arrow-right"
+            type="button"
+            data-experience-next
+            aria-label="Next experiences"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24">
+              <path d="m9 18 6-6-6-6"></path>
+            </svg>
+          </button>
+        </div>
+        <div class="carousel-dots" aria-label="Experience pages">
+          {
+            Array.from({ length: experiencePageCount }, (_, index) => (
+              <button
+                type="button"
+                data-experience-dot
+                data-page={index}
+                aria-label={`Show experience page ${index + 1}`}
+              />
+            ))
+          }
+        </div>
+      </section>
+
+      <a class="section-jump" href="#projects" aria-label="Jump to Projects">
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M12 5v14"></path>
+          <path d="m19 12-7 7-7-7"></path>
+        </svg>
+      </a>
+
+      <section class="section" id="projects" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <h2 id="projects-title">Projects</h2>
+        </div>
+        <div class="project-list">
+          {
+            projects.map((project) => (
+              <article class="project-item">
+                <div>
+                  <a href={project.link} target="_blank" rel="noreferrer">
+                    <h3>{project.title}</h3>
+                  </a>
+                  <p>{project.description}</p>
+                </div>
+                <ul class="tech-list" aria-label={`${project.title} technologies`}>
+                  {project.tech.map((tech) => (
+                    <li>{tech}</li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+    </div>
   </main>
 </BaseLayout>
+
+<script>
+  const carousel = document.querySelector("[data-experience-carousel]");
+  const items = Array.from(document.querySelectorAll("[data-experience-item]"));
+  const previousButton = document.querySelector("[data-experience-prev]");
+  const nextButton = document.querySelector("[data-experience-next]");
+  const dots = Array.from(document.querySelectorAll("[data-experience-dot]"));
+
+  if (carousel && items.length && previousButton && nextButton) {
+    const pageSize = Number(carousel.getAttribute("data-page-size") || "3");
+    const pageCount = Math.max(1, Math.ceil(items.length / pageSize));
+    let page = 0;
+    let isAnimating = false;
+
+    const showPage = (targetPage) => {
+      items.forEach((item, index) => {
+        const isVisible = Math.floor(index / pageSize) === targetPage;
+        item.toggleAttribute("hidden", !isVisible);
+      });
+    };
+
+    const updateDots = () => {
+      dots.forEach((dot, index) => {
+        dot.toggleAttribute("aria-current", index === page);
+      });
+
+      previousButton.toggleAttribute("disabled", page === 0);
+      nextButton.toggleAttribute("disabled", page === pageCount - 1);
+    };
+
+    const render = () => {
+      showPage(page);
+      updateDots();
+    };
+
+    const lockCarouselHeight = () => {
+      const currentPage = page;
+      let maxHeight = 0;
+
+      carousel.style.minHeight = "";
+
+      for (let pageIndex = 0; pageIndex < pageCount; pageIndex += 1) {
+        showPage(pageIndex);
+        maxHeight = Math.max(maxHeight, carousel.getBoundingClientRect().height);
+      }
+
+      showPage(currentPage);
+      carousel.style.minHeight = `${Math.ceil(maxHeight)}px`;
+    };
+
+    const goToPage = (nextPage) => {
+      if (isAnimating || nextPage === page) {
+        return;
+      }
+
+      if (nextPage < 0 || nextPage >= pageCount) {
+        return;
+      }
+
+      const direction = nextPage > page ? "next" : "prev";
+      isAnimating = true;
+      carousel.classList.add(`is-slide-out-${direction}`);
+
+      window.setTimeout(() => {
+        page = nextPage;
+        render();
+        carousel.classList.remove(`is-slide-out-${direction}`);
+        carousel.classList.add(`is-slide-in-${direction}`);
+        carousel.getBoundingClientRect();
+
+        window.requestAnimationFrame(() => {
+          carousel.classList.remove(`is-slide-in-${direction}`);
+
+          window.setTimeout(() => {
+            isAnimating = false;
+          }, 220);
+        });
+      }, 180);
+    };
+
+    previousButton.addEventListener("click", () => {
+      goToPage(page - 1);
+    });
+
+    nextButton.addEventListener("click", () => {
+      goToPage(page + 1);
+    });
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        goToPage(index);
+      });
+    });
+
+    lockCarouselHeight();
+    render();
+
+    window.addEventListener("resize", () => {
+      lockCarouselHeight();
+      render();
+    });
+  }
+</script>
