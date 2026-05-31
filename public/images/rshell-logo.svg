@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">RShell logo</title>
+  <desc id="desc">A minimal terminal-inspired logo for the RShell project.</desc>
+  <rect width="960" height="600" rx="40" fill="#1f2023" />
+  <rect x="112" y="96" width="736" height="408" rx="24" fill="#292a2e" stroke="#3b3c40" stroke-width="6" />
+  <circle cx="160" cy="142" r="14" fill="#f59f45" />
+  <circle cx="202" cy="142" r="14" fill="#c4b9aa" opacity="0.65" />
+  <circle cx="244" cy="142" r="14" fill="#8f887f" opacity="0.65" />
+  <path d="M210 292l72-72 28 28-44 44 44 44-28 28-72-72z" fill="#f59f45" />
+  <text
+    x="340"
+    y="318"
+    fill="#f59f45"
+    font-family="SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace"
+    font-size="72"
+    font-weight="800"
+  >rshell</text>
+  <path d="M340 360h250" stroke="#f5f1e8" stroke-width="20" stroke-linecap="round" opacity="0.92" />
+</svg>

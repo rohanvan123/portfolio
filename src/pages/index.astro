@@ -32,6 +32,8 @@ const visibleExperiences = experiences
     return sortDateValue(b.startDate) - sortDateValue(a.startDate);
   });
 
+const visibleProjects = projects.filter((project) => project.display);
+
 const getInitials = (name: string) =>
   name
     .split(" ")
@@ -44,8 +46,8 @@ const experiencePageCount = Math.ceil(visibleExperiences.length / experiencePage
 ---
 
 <BaseLayout
-  title="Rohan Vanjani | Personal Website"
-  description="Minimal personal website and portfolio for Rohan Vanjani."
+  title="Rohan Vanjani | Software Engineer"
+  description="Portfolio, experience, and projects for software engineer Rohan Vanjani."
 >
   <main>
     <div class="portfolio-stack">
@@ -231,19 +233,25 @@ const experiencePageCount = Math.ceil(visibleExperiences.length / experiencePage
         </div>
         <div class="project-list">
           {
-            projects.map((project) => (
+            visibleProjects.map((project) => (
               <article class="project-item">
-                <div>
-                  <a href={project.link} target="_blank" rel="noreferrer">
-                    <h3>{project.title}</h3>
-                  </a>
-                  <p>{project.description}</p>
-                </div>
-                <ul class="tech-list" aria-label={`${project.title} technologies`}>
-                  {project.tech.map((tech) => (
-                    <li>{tech}</li>
-                  ))}
-                </ul>
+                <a class="project-card-link" href={project.link} target="_blank" rel="noreferrer">
+                  <div class="project-image-wrap">
+                    <img src={project.imageUrl} alt="" loading="lazy" />
+                  </div>
+                  <div class="project-card-body">
+                    <div class="project-card-header">
+                      <h3>{project.title}</h3>
+                      <span aria-hidden="true">↗</span>
+                    </div>
+                    <p>{project.description}</p>
+                    <ul class="tech-list" aria-label={`${project.title} technologies`}>
+                      {project.tech.map((tech) => (
+                        <li>{tech}</li>
+                      ))}
+                    </ul>
+                  </div>
+                </a>
               </article>
             ))
           }

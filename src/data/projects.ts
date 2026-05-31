@@ -4,16 +4,18 @@ export interface Project {
   tech: string[];
   imageUrl: string;
   link: string;
+  display: boolean;
 }
 
 const projects: Project[] = [
   {
     title: "RV Programming Language",
     description:
-      "C++ interpreter for my very own python-like programming language",
-    tech: ["C++"],
-    imageUrl: "/images/pathfinding-vis.png",
+      "RV is a Python-inspired programming language written in C++, featuring custom lexing, parsing, AST generation, IR compilation, and runtime execution through an interactive web interface",
+    tech: ["C++", "Flask", "Next.js"],
+    imageUrl: "/images/interpreter.png",
     link: "https://rohanvanjani.com/pathfinding-visualizer/",
+    display: true,
   },
   {
     title: "Pathfinding Visualizer",
@@ -21,7 +23,8 @@ const projects: Project[] = [
       "Web app for visualizing pathfinding algorithms like BFS, Dijkstra's, and A* Search",
     tech: ["Next.js", "Tailwind", "Typescript"],
     imageUrl: "/images/pathfinding-vis.png",
-    link: "https://rohanvanjani.com/pathfinding-visualizer/",
+    link: "https://pathfinding-visualizer-fawn-ten.vercel.app/",
+    display: true,
   },
   {
     title: "Investment Portfolio",
@@ -30,14 +33,7 @@ const projects: Project[] = [
     tech: ["Next.js", "Firebase Auth", "ReCharts", "Firebase DB"],
     imageUrl: "/images/investment-portfolio.png",
     link: "https://investment-portfolio-rohanvan123.vercel.app/",
-  },
-  {
-    title: "Language Interpreter",
-    description:
-      "C++ interpreter for a custom python-like language with a frontend for visualization Lexer & Parser outputs",
-    tech: ["C++", "Flask", "Next.js"],
-    imageUrl: "/images/interpreter.png",
-    link: "https://rohanvanjani.com/pathfinding-visualizer/",
+    display: true,
   },
   {
     title: "Nowcasting Dashboard",
@@ -47,14 +43,16 @@ const projects: Project[] = [
     imageUrl:
       "https://user-images.githubusercontent.com/23221268/242501890-f2d56861-c906-4670-9e10-d380ad56eaeb.png",
     link: "https://github.com/openclimatefix/pv-sites-mobile",
+    display: true,
   },
   {
-    title: "RShell",
+    title: "rshell",
     description:
       "Custom implementation of the UNIX-based shell with directory tree managment and execuation capabilities",
     tech: ["C", "Python"],
-    imageUrl: "/images/rshell.png",
+    imageUrl: "/images/rshell-logo.svg",
     link: "https://github.com/rohanvan123/rshell",
+    display: true,
   },
   {
     title: "Mosaic Image Generator",
@@ -63,6 +61,7 @@ const projects: Project[] = [
     tech: ["C++", "CMake", "Docker"],
     imageUrl: "/images/mosaic-image.png",
     link: "https://github.com/rohanvan123/mosaic-image-gen",
+    display: false,
   },
   {
     title: "Brink",
@@ -71,6 +70,7 @@ const projects: Project[] = [
     tech: ["Hack4Impact", "Open Source"],
     imageUrl: "/images/brink.png",
     link: "https://brink.h4i.app/landing",
+    display: false,
   },
   {
     title: "Hangman",
@@ -79,6 +79,7 @@ const projects: Project[] = [
     tech: ["Next.js"],
     imageUrl: "/images/hangman.png",
     link: "https://hangman-vercel.vercel.app/",
+    display: false,
   },
 ];
 
