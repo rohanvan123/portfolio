@@ -436,8 +436,10 @@ h3 {
 }
 
 .timeline-meta {
-  display: grid;
-  gap: 3px;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
   margin-bottom: 5px;
 }
 
@@ -446,13 +448,57 @@ h3 {
   font-size: 1rem;
 }
 
+.company-line {
+  display: flex;
+  min-width: 0;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
 .timeline-meta a {
   text-decoration: none;
 }
 
-.timeline-meta span {
+.timeline-side-meta {
+  display: grid;
+  justify-items: end;
+  gap: 3px;
+  flex: 0 0 auto;
+}
+
+.timeline-side-meta span {
   color: var(--soft);
   font-size: 0.84rem;
+}
+
+.role-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 4px;
+}
+
+.role-line span {
+  flex: 0 0 auto;
+  color: var(--soft);
+  font-size: 0.84rem;
+}
+
+.current-pill {
+  display: inline-flex;
+  min-height: 22px;
+  align-items: center;
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  border-radius: 999px;
+  padding: 2px 9px;
+  background: rgba(34, 197, 94, 0.13);
+  color: #86efac;
+  font-size: 0.72rem;
+  font-weight: 750;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .timeline-content p,
@@ -464,6 +510,7 @@ h3 {
 .role {
   color: var(--text) !important;
   font-weight: 650;
+  margin-bottom: 0;
 }
 
 .about-panel {
@@ -531,8 +578,9 @@ h3 {
   min-width: 0;
 }
 
-.project-card-link {
+.project-card {
   display: grid;
+  grid-template-rows: 1fr auto;
   height: 100%;
   overflow: hidden;
   border: 1px solid var(--line);
@@ -546,11 +594,18 @@ h3 {
     background-color 160ms ease;
 }
 
-.project-card-link:hover {
+.project-card:hover {
   border-color: var(--accent-line);
   background: rgba(245, 159, 69, 0.06);
   color: inherit;
   transform: translateY(-2px);
+}
+
+.project-primary-link {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  color: inherit;
+  text-decoration: none;
 }
 
 .project-image-wrap {
@@ -570,6 +625,7 @@ h3 {
 
 .project-card-body {
   display: grid;
+  grid-template-rows: auto minmax(5.4em, 1fr) auto auto;
   gap: 12px;
   padding: 18px;
 }
@@ -584,16 +640,36 @@ h3 {
 .project-card-header h3 {
   margin: 0;
   font-size: 1.04rem;
+  line-height: 1.18;
 }
 
-.project-card-header span {
+.project-card-header h3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.project-primary-link:hover .project-card-header h3 {
   color: var(--accent);
-  font-size: 1.05rem;
+}
+
+.project-card-header svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 }
 
 .project-card-body p {
   margin: 0;
   color: var(--muted);
+  align-self: start;
 }
 
 .tech-list {
@@ -607,23 +683,72 @@ h3 {
 }
 
 .tech-list li {
+  display: inline-flex;
+  min-height: 32px;
+  align-items: center;
+  justify-content: center;
   border: 1px solid var(--line);
   border-radius: 8px;
-  padding: 4px 8px;
+  padding: 5px 10px;
   background: var(--panel);
   color: var(--muted);
   font-size: 0.82rem;
-  line-height: 1.35;
+  line-height: 1;
+}
+
+.project-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0 18px 18px;
+}
+
+.project-actions a {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  border: 1px solid var(--accent-line);
+  border-radius: 8px;
+  padding: 6px 10px;
+  color: var(--accent);
+  font-size: 0.84rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.project-actions a:hover {
+  background: var(--accent-soft);
+}
+
+.project-actions svg {
+  width: 17px;
+  height: 17px;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 }
 
 .site-footer {
   display: flex;
-  justify-content: space-between;
-  gap: 20px;
   border-top: 1px solid var(--line);
   padding: 30px 0 44px;
   color: var(--muted);
   font-size: 0.94rem;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 9px;
+}
+
+.footer-links > * + *::before {
+  content: "·";
+  margin-right: 9px;
+  color: var(--soft);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -680,6 +805,20 @@ h3 {
 
   .carousel-arrow {
     display: none;
+  }
+
+  .timeline-meta {
+    display: grid;
+    gap: 5px;
+  }
+
+  .timeline-side-meta {
+    justify-items: start;
+  }
+
+  .role-line {
+    display: grid;
+    gap: 3px;
   }
 
   .tech-list {

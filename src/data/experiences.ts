@@ -5,7 +5,10 @@ export interface Experience {
   position: string;
   startDate: string;
   endDate: string | null;
+  location: string;
+  current: boolean;
   display: boolean;
+  professional: boolean;
   description: string;
 }
 
@@ -17,9 +20,12 @@ const experiences: Experience[] = [
     position: "Software Development Engineer",
     startDate: "2025-08",
     endDate: null,
+    location: "Huntsville, AL",
+    current: true,
     display: true,
+    professional: true,
     description:
-      "Engineered end-to-end solutions by integrating new features into React.js, Node.js, and Django applications.",
+      "Building backend services and internal tools that support manufacturing and supply chain operations using Java, Spring Boot, AWS, and GraphQL.",
   },
   {
     url: "https://www.chicagoventure.com/",
@@ -28,9 +34,12 @@ const experiences: Experience[] = [
     position: "Full Stack Developer Intern",
     startDate: "2024-05",
     endDate: "2024-08",
+    location: "Chicago, IL",
+    current: false,
     display: true,
+    professional: true,
     description:
-      "Engineered end-to-end solutions by integrating new features into React.js, Node.js, and Django applications.",
+      "Pioneered research & deployment of tooling for monitoring internal apps. Implemented stakeholder-requested features in internal Django applications.",
   },
   {
     url: "https://www.akpsiuiuc.biz/",
@@ -39,20 +48,26 @@ const experiences: Experience[] = [
     position: "Technical Recruitment Chair",
     startDate: "2023-12",
     endDate: "2024-04",
+    location: "Champaign, IL",
+    current: false,
     display: true,
+    professional: false,
     description:
-      "Architected Google App Script programs to automated the process of organizing, maintaining, and tracking applicants during our Spring recruitment cycle",
+      "Engineered Google Apps Script programs to automate organizing, maintaining, and tracking applicants during our Spring recruitment cycle",
   },
   {
     url: "https://www.zebra.com/us/en.html",
     company: "Zebra Technologies",
-    img: "https://www.inkworldmagazine.com/wp-content/uploads/sites/15/2025/05/166_main-14.jpg",
-    position: "Software Engineer Intern",
+    img: "https://api.the-trackr.com/companies/logo/zebra-technologies",
+    position: "Software Engineer Intern II",
     startDate: "2023-06",
     endDate: "2023-08",
+    location: "Lincolnshire, IL",
+    current: false,
     display: true,
+    professional: true,
     description:
-      "Implemented a Prometheus pipeline to scrape and track release data giving managers better insights into project completion on the cloud",
+      "Architected a Prometheus pipeline to scrape github release data from a Spring Boot app, persist data in a GCP Bucket, and notify via an RSS feed.",
   },
   {
     url: "https://crowddynamicslab.github.io/",
@@ -61,53 +76,67 @@ const experiences: Experience[] = [
     position: "Undergraduate Research Assistant",
     startDate: "2023-01",
     endDate: "2023-05",
+    location: "Champaign, IL",
+    current: false,
     display: true,
+    professional: false,
     description:
-      "Worked with Dr. Hari Sundaram to build a web-scraping app for comparing various industry prices on Amazon",
+      "Worked under Dr. Hari Sundaram to implement a Python script to web-scrape pricing data from Amazon to highlight price discrimination.",
   },
   {
     url: "https://uiuc.hack4impact.org/",
     company: "Hack4Impact UIUC",
-    img: "https://media.licdn.com/dms/image/C560BAQGDbdhpmxRmrg/company-logo_200_200/0/1633548684667?e=2147483647&v=beta&t=uzgi1imN65DlpVvbd0TUb-S1L4pTNXwoS0tkolTipKs",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdtkWasCaUKkaO2uHNb4lo3TY0RVUo7dBX1A&s",
     position: "Software Developer",
     startDate: "2022-09",
     endDate: "2023-12",
+    location: "Champaign, IL",
+    current: false,
     display: true,
+    professional: false,
     description:
-      "Building public-facing web and mobile applications for nonprofit organizations.",
+      "Developed public-facing web and mobile applications for nonprofit organizations with a team of students.",
   },
   {
     url: "https://www.zebra.com/us/en.html",
     company: "Zebra Technologies",
-    img: "https://www.inkworldmagazine.com/wp-content/uploads/sites/15/2025/05/166_main-14.jpg",
+    img: "https://api.the-trackr.com/companies/logo/zebra-technologies",
     position: "Software Engineer Intern",
     startDate: "2022-05",
     endDate: "2022-08",
+    location: "Lincolnshire, IL",
+    current: false,
     display: true,
+    professional: true,
     description:
-      "Assisted in implementing a AndroidOS Blutooth Low Energy Tech stack for a temperature sensing device",
+      "Assisted in implementing a Blutooth Low Energy Tech stack for a temperature sensing device.",
   },
   {
     url: "https://giesbusiness.illinois.edu/experience/experiential-learning/illinois-business-consulting",
     company: "Illinois Business Consulting",
-    img: "https://media.licdn.com/dms/image/C4E0BAQHXpt3Z77TTTg/company-logo_200_200/0/1524591453687?e=2147483647&v=beta&t=UcDxleqvyfRWfKf9Xo6uLiJMaOMcq3_pJ8496H0_LQo",
+    img: "https://pbs.twimg.com/profile_images/970180612173828097/kYVZol1c_400x400.jpg",
     position: "Consultant",
     startDate: "2021-09",
     endDate: "2022-01",
-    display: false,
+    location: "Champaign, IL",
+    current: false,
+    display: true,
+    professional: false,
     description:
       "Conducted market entry research for a chemical battery additive manufacturer in East Asia.",
   },
   {
     url: "https://siteinnovator.com/",
     company: "SiteInnovator",
-    img: "https://pbs.twimg.com/profile_images/1253312931946803200/F9wKZuhw_400x400.jpg",
+    img: "https://siteinnovator.com/wp-content/uploads/2022/01/cropped-cropped-SiteInnovator-1-01-e1643391722155-300x64.png",
     position: "Web Developer",
     startDate: "2019-05",
     endDate: "2021-02",
-    display: false,
-    description:
-      "Designed websites for local businesses with WordPress to help expand their online presence.",
+    location: "Naperville, IL",
+    current: false,
+    display: true,
+    professional: false,
+    description: "Designed websites for local businesses with WordPress.",
   },
 ];
 
